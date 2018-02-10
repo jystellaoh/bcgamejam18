@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/OfficeBattle.unity
+- path: Assets/Scenes/Dream2.unity
   isLoaded: 1
   isActive: 1
