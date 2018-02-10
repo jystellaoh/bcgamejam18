@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Main.unity
+    path: Assets/Scenes/Main.unity
     guid: 1676669fc0f1ffe45a838c903316fa62
+  - enabled: 1
+    path: Assets/Scenes/OfficeBattle.unity
+    guid: 8f9a2bacd5ea52f4cb8c1d4302dd5f77
