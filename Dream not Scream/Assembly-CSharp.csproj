@@ -702,6 +702,8 @@
      <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextMeshColorThemeWidget.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
      <Compile Include="Assets\Scripts\ChangeSceneOnTouch.cs" />
+     <Compile Include="Assets\Scripts\EyemoleManager.cs" />
+     <Compile Include="Assets\Scripts\WhackEyemole.cs" />
      <None Include="Assets\HoloToolkit\Utilities\Shaders\Obsolete\UnlitConfigurable.shader" />
      <None Include="Assets\HoloToolkit\UX\Shaders\HUXButtonShader.shader" />
      <None Include="Assets\HoloToolkit\SpatialUnderstanding\Materials\SpatialUnderstandingSurface.shader" />
