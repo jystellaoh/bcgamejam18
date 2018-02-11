@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
-
+using HoloToolkit.Unity;
 namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
 {
     /// <summary>
@@ -17,6 +17,8 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
         [SerializeField]
         public AudioSource[] phrases;
         [SerializeField]
+        public AudioSource winningAudio;
+        [SerializeField]
         public GameObject mole;
 
         public float spawnRadius;
@@ -24,12 +26,9 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
         public GameObject camera;
 
         private float timeSinceLastSpawn = 0f;
-        private float timeBetweenSpawns = 5f;
-        
-        private void Awake()
-        {
+        private float timeBetweenSpawns = 10f;
 
-        }
+        private bool isFading = false; 
 
         private void Update() {
 
@@ -37,7 +36,20 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
                 SpawnEyemole();
                 timeSinceLastSpawn = Time.time;
             }
+        }
 
+
+        public void CheckIfDone() {
+            WhackEyemole[] eyemoles = Object.FindObjectOfType(WhackEyemole);
+            if (eyemoles.count == 0) {
+                winningAudio.Play();
+                FadeManager.DoFade(0f, 5f, null, null);
+                Invoke("GoBackToMain", 5);
+            }
+        }
+
+        private void GoBackToMain() {
+            SceneManager.LoadScene(0);
         }
 
         private void SpawnEyemole() {

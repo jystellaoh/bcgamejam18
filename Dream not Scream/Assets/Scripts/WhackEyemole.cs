@@ -19,6 +19,8 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
         public AudioSource deathSound;
         [SerializeField]
         private AudioSource phrase = null;
+        [SerializeField]
+        public GameObject moleManager;
 
         private float minY = -5f; 
         private float baseY = 0.1f;
@@ -57,6 +59,7 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
 
             if (gameObject.transform.position.y <= minY)
             {
+                moleManager.SendMessage("CheckIfDone");
                 Destroy(gameObject);
             }
 
