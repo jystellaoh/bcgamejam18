@@ -26,7 +26,7 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
         private bool isDying = false;
 
         private float timeSinceLastPhrase = 0f;
-        private float timeBetweenPhrases = 0.5f;
+        private float timeBetweenPhrases = 10f;
         
         private void Awake()
         {
@@ -47,7 +47,7 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
             Vector3 molePosition = gameObject.transform.position;
 
             if (isDying) {
-                molePosition.y -= 0.01f;
+                molePosition.y -= 0.1f;
                 gameObject.transform.position = molePosition;
             } 
             else if (Time.time - timeSinceLastPhrase >= timeBetweenPhrases) {
@@ -55,14 +55,17 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
                 timeSinceLastPhrase = Time.time;
             }
 
+            if (gameObject.transform.position.y <= minY)
+            {
+                Destroy(gameObject);
+            }
+
             if (gameObject.transform.position.y <= baseY) {
                 molePosition += Vector3.up * 0.01f;
                 gameObject.transform.position = molePosition;
             }
 
-            if (gameObject.transform.position.y <= minY) {
-                Destroy(gameObject);
-            }
+
         }
 
         private void Whack(BaseGrabbable baseGrab)

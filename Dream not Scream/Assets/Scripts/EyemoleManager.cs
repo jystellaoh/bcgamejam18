@@ -21,9 +21,10 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
 
         public float spawnRadius;
 
+        public GameObject camera;
 
         private float timeSinceLastSpawn = 0f;
-        private float timeBetweenSpawns = 0.5f;
+        private float timeBetweenSpawns = 5f;
         
         private void Awake()
         {
@@ -34,16 +35,17 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
 
             if (Time.time - timeSinceLastSpawn >= timeBetweenSpawns) {
                 SpawnEyemole();
+                timeSinceLastSpawn = Time.time;
             }
 
         }
 
         private void SpawnEyemole() {
 
-            GameObject eyemoleObj = Instantiate(mole);
-            mole.transform.parent = gameObject.transform;
-            System.Random rnd = new System.Random();
-            mole.transform.localPosition += new Vector3(Mathf.Sin(rnd.Next(0, 360) * 2 * Mathf.PI / 180), 0, Mathf.Cos(rnd.Next(0, 360) * 2 * Mathf.PI / 180));
+            GameObject eyemoleObj = Instantiate(mole);   
+            System.Random rndX =  new System.Random();
+            System.Random rndY = new System.Random();
+            mole.transform.position = camera.transform.position + new Vector3(Mathf.Sin(rndX.Next(0, 360) * 2 * Mathf.PI / 180), 0, Mathf.Cos(rndY.Next(0, 360) * 2 * Mathf.PI / 180))*spawnRadius;
             System.Random rndP = new System.Random();
             AudioSource randomPhrase = phrases[(int) rndP.Next(0, phrases.Count())];
             mole.GetComponent<WhackEyemole>().SetPhrase(randomPhrase);
