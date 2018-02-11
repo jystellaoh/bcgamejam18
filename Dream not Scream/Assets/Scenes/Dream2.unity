@@ -845,25 +845,25 @@ Prefab:
         type: 2}
       propertyPath: AlternateLeftController
       value: 
-      objectReference: {fileID: 1174178522682152, guid: 220e3b6fcfa4c2540974c01f8a3d6d00,
+      objectReference: {fileID: 1307094409675516, guid: 0274dea4ced306447b7aa04e557cdc8f,
         type: 2}
     - target: {fileID: 114710303647202208, guid: d29bc40b7f3df26479d6a0aac211c355,
         type: 2}
       propertyPath: AlternateRightController
       value: 
-      objectReference: {fileID: 1403263321772264, guid: c2081e6330864504e84ff194b3f6110d,
+      objectReference: {fileID: 1871677044501440, guid: eae61224221bd5749a37ccefc88ce97e,
         type: 2}
     - target: {fileID: 4931155170010354, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4931155170010354, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4931155170010354, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
