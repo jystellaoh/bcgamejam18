@@ -845,13 +845,13 @@ Prefab:
         type: 2}
       propertyPath: AlternateLeftController
       value: 
-      objectReference: {fileID: 1621749399841580, guid: bc47e4214f8e5bb449ec4bf97dea577e,
+      objectReference: {fileID: 1174178522682152, guid: 220e3b6fcfa4c2540974c01f8a3d6d00,
         type: 2}
     - target: {fileID: 114710303647202208, guid: d29bc40b7f3df26479d6a0aac211c355,
         type: 2}
       propertyPath: AlternateRightController
       value: 
-      objectReference: {fileID: 1884514407831644, guid: fd36cf348b4073e469f44bd62f82305e,
+      objectReference: {fileID: 1403263321772264, guid: c2081e6330864504e84ff194b3f6110d,
         type: 2}
     - target: {fileID: 4931155170010354, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_LocalScale.x
