@@ -3,64 +3,96 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using HoloToolkit.Unity;
-namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
+using HoloToolkit.Unity.InputModule.Examples.Grabbables;
+
+public class EyemoleManager : MonoBehaviour
 {
-    /// <summary>
-    /// Simple class to change the color of grabbable objects based on state
-    /// </summary>
-    public class EyemoleManager : MonoBehaviour
+
+    [SerializeField]
+    public AudioSource[] phrases;
+    [SerializeField]
+    public AudioSource winningAudio;
+    [SerializeField]
+    public AudioSource failAudio;
+    [SerializeField]
+    public GameObject mole;
+
+    public float spawnRadius;
+
+    public GameObject camera;
+    public GameObject timerText;
+    private Text txt;
+
+    private float timeSinceLastSpawn = 0f;
+    private float timeBetweenSpawns = 10f;
+
+    public float timeOut = 60f;
+
+    private bool isSpawning = true;
+
+    public void Awake()
     {
+        txt = timerText.GetComponentInChildren<Text>();
+    }
 
-        [SerializeField]
-        public AudioSource[] phrases;
-        [SerializeField]
-        public AudioSource winningAudio;
-        [SerializeField]
-        public GameObject mole;
 
-        public float spawnRadius;
+    private void Update()
+    {
+        if (isSpawning)
+        {
 
-        public GameObject camera;
-
-        private float timeSinceLastSpawn = 0f;
-        private float timeBetweenSpawns = 10f;
-
-        private bool isFading = false; 
-
-        private void Update() {
-
-            if (Time.time - timeSinceLastSpawn >= timeBetweenSpawns) {
+            if ((Time.time - timeSinceLastSpawn >= timeBetweenSpawns))
+            {
                 SpawnEyemole();
                 timeSinceLastSpawn = Time.time;
             }
-        }
 
-
-        public void CheckIfDone() {
-            WhackEyemole[] eyemoles = Object.FindObjectOfType(WhackEyemole);
-            if (eyemoles.count == 0) {
-                winningAudio.Play();
-                FadeManager.DoFade(0f, 5f, null, null);
+            float timeRemaining = Mathf.Clamp(timeOut - Time.time, 0f, 100000f);
+            string displayTxt = Math.Floor(timeRemaining / 60).ToString() + " : " + (((int)timeRemaining) % 60).ToString();
+            txt.text = displayTxt;
+            if (timeRemaining <= 0)
+            {
+                isSpawning = false;
+                failAudio.Play();
+                FadeManager.Instance.DoFade(5f, 0f, null, null);
                 Invoke("GoBackToMain", 5);
             }
         }
+    }
 
-        private void GoBackToMain() {
-            SceneManager.LoadScene(0);
+
+    public void CheckIfDone()
+    {
+        UnityEngine.Object[] eyemoles = FindObjectsOfType(typeof(WhackEyemole));
+        Debug.Log(eyemoles.Count());
+        if (eyemoles.Count() == 1)
+        {
+            isSpawning = false;
+            winningAudio.Play();
+            GameStateManager.dream2Completed = true;
+            FadeManager.Instance.DoFade(5f, 0f, null, null);
+            Invoke("GoBackToMain", 5);
         }
+    }
 
-        private void SpawnEyemole() {
+    private void GoBackToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
 
-            GameObject eyemoleObj = Instantiate(mole);   
-            System.Random rndX =  new System.Random();
-            System.Random rndY = new System.Random();
-            mole.transform.position = camera.transform.position + new Vector3(Mathf.Sin(rndX.Next(0, 360) * 2 * Mathf.PI / 180), 0, Mathf.Cos(rndY.Next(0, 360) * 2 * Mathf.PI / 180))*spawnRadius;
-            System.Random rndP = new System.Random();
-            AudioSource randomPhrase = phrases[(int) rndP.Next(0, phrases.Count())];
-            mole.GetComponent<WhackEyemole>().SetPhrase(randomPhrase);
-        }
+    private void SpawnEyemole()
+    {
+
+        GameObject eyemoleObj = Instantiate(mole);
+        System.Random rndX = new System.Random();
+        System.Random rndY = new System.Random();
+        mole.transform.position = camera.transform.position + new Vector3(Mathf.Sin(rndX.Next(0, 360) * 2 * Mathf.PI / 180), 0, Mathf.Cos(rndY.Next(0, 360) * 2 * Mathf.PI / 180)) * spawnRadius;
+        System.Random rndP = new System.Random();
+        AudioSource randomPhrase = phrases[(int)rndP.Next(0, phrases.Count())];
+        mole.GetComponent<WhackEyemole>().SetPhrase(randomPhrase);
     }
 }

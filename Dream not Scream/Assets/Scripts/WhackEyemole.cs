@@ -5,11 +5,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
-{
-    /// <summary>
-    /// Simple class to change the color of grabbable objects based on state
-    /// </summary>
+using HoloToolkit.Unity.InputModule.Examples.Grabbables;
+
     public class WhackEyemole : MonoBehaviour
     {
 
@@ -19,16 +16,15 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
         public AudioSource deathSound;
         [SerializeField]
         private AudioSource phrase = null;
-        [SerializeField]
-        public GameObject moleManager;
+        private GameObject moleManager;
 
         private float minY = -5f; 
-        private float baseY = 0.1f;
+        private float baseY = 0.2f;
 
         private bool isDying = false;
 
         private float timeSinceLastPhrase = 0f;
-        private float timeBetweenPhrases = 10f;
+        private float timeBetweenPhrases = 5f;
         
         private void Awake()
         {
@@ -36,7 +32,7 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
             {
                 grabbable = GetComponent<BaseGrabbable>();
             }
-          
+            moleManager = GameObject.FindGameObjectWithTag("MoleManager");
             grabbable.OnContactStateChange += Whack;
         }
 
@@ -98,4 +94,4 @@ namespace HoloToolkit.Unity.InputModule.Examples.Grabbables
 
         }
     }
-}
+

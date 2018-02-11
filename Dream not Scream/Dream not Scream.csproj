@@ -937,6 +937,7 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
     <Compile Include="Assets\Scripts\ChangeSceneOnTouch.cs" />
     <Compile Include="Assets\Scripts\EyemoleManager.cs" />
+    <Compile Include="Assets\Scripts\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\WhackEyemole.cs" />
   </ItemGroup>
   <ItemGroup>
